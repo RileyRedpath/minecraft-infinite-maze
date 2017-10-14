@@ -10,4 +10,4 @@ Collect as many diamonds as possible!
 # Setup
 1) Load the jar with Forge.
 2) Create a new superflat world with preset:
-> 3;4*mincraft:bedrock;2;
+> 3;4*minecraft:bedrock;2;
