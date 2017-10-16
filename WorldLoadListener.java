@@ -29,7 +29,7 @@ public class WorldLoadListener {
         if(world.provider.getDimension() == 0) {
             world.setSpawnPoint(new BlockPos(16,4,16));
             MazeChest initialChest = new MazeChest(3,3);
-            initialChest.createChest(world,8,8);
+            initialChest.createChest(world,8,8, 2);
             mazeGen.makeZoomedMazeChunks(new Random(world.getSeed()));
         }
 
