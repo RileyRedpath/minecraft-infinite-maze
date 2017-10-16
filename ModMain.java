@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 
 @Mod(modid="maze",name = "maze",version = "1.0")
-public class MazeMod {
+public class ModMain {
 
     @Mod.EventHandler
     public void load(FMLInitializationEvent event){

@@ -13,6 +13,11 @@ import java.util.*;
 public class MazeGen implements IWorldGenerator {
 
     private MazeChunk zoomedChunk;
+    private MazeChunkFactory mazeChunkFactory;
+
+    MazeGen(){
+        mazeChunkFactory = new MazeChunkFactory(8);
+    }
 
 
     @Override
@@ -20,24 +25,21 @@ public class MazeGen implements IWorldGenerator {
          if(world.provider.getDimension() == 0) {
 
              if(!(chunkX == 0 && chunkZ == 0)){
-                 MazeChunk mazeChunk = new MazeChunk(random);
+                 MazeChunk mazeChunk = mazeChunkFactory.getNewMazeChunk(random);
                  mazeChunk.recursiveBacktrackMaze(random);
                  if(zoomedChunk == null){
-                     mazeChunk.setXDoor(random);
-                     mazeChunk.setZDoor(random);
+                     mazeChunk.createXDoor(random);
+                     mazeChunk.createZDoor(random);
                  }else {
                      Cell chunkCell = zoomedChunk.getCell(Math.floorMod(chunkX,8),Math.floorMod(chunkZ,8));
                      if(!chunkCell.xWall){
-                         mazeChunk.setXDoor(random);
+                         mazeChunk.createXDoor(random);
                      }
                      if(!chunkCell.zWall){
-                         mazeChunk.setZDoor(random);
+                         mazeChunk.createZDoor(random);
                      }
                  }
                  mazeChunk.construct(world, chunkX, chunkZ);
-                 if(Math.abs(chunkX) < 3 && Math.abs(chunkZ) < 3) {
-                     //mazeChunk.spawnMobs(world, random, chunkX * 16 + 8, chunkZ * 16 + 8);
-                 }
              }
 
          }
@@ -45,10 +47,10 @@ public class MazeGen implements IWorldGenerator {
     }
 
     void makeZoomedMazeChunks(Random zoomedOutRNG){
-        zoomedChunk = new MazeChunk(zoomedOutRNG);
+        zoomedChunk = mazeChunkFactory.getNewMazeChunk(zoomedOutRNG,200);
         zoomedChunk.recursiveBacktrackMaze(zoomedOutRNG);
-        zoomedChunk.setZDoor(zoomedOutRNG);
-        zoomedChunk.setXDoor(zoomedOutRNG);
+        zoomedChunk.createZDoor(zoomedOutRNG);
+        zoomedChunk.createXDoor(zoomedOutRNG);
     }
 
 

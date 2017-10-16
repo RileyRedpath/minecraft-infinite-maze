@@ -72,8 +72,8 @@ class MazeChest {
         }
     }
 
-    void createChest(World world, int xOrg, int zOrg) {
-        BlockPos chestPos = new BlockPos(xOrg + 2 * x, 4, zOrg + 2 * z);
+    void createChest(World world, int xOrg, int zOrg, int cellSize) {
+        BlockPos chestPos = new BlockPos(xOrg + cellSize * x, 4, zOrg + cellSize * z);
         world.setBlockState(chestPos, Blocks.CHEST.getDefaultState());
         TileEntityChest chestEntity = (TileEntityChest) world.getTileEntity(chestPos);
 
